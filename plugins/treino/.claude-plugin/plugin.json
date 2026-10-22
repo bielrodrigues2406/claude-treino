@@ -1,0 +1,87 @@
+{
+  "name": "treino",
+  "displayName": "Treino (Polar H10)",
+  "version": "0.1.0",
+  "description": "Carga de treino, trava tibial de 48 h, análise de treinos da Polar e de gravações do openPulse pelo servidor MCP do pulse-kit.",
+  "author": {
+    "name": "bielrodrigues2406"
+  },
+  "repository": "https://github.com/bielrodrigues2406/claude-treino",
+  "keywords": [
+    "polar",
+    "h10",
+    "hrv",
+    "dfa-alpha1",
+    "treino"
+  ],
+  "mcpServers": {
+    "pulse-kit": {
+      "command": "node",
+      "args": [
+        "${user_config.pulse_kit_dir}/apps/mcp/dist/index.js"
+      ],
+      "env": {
+        "GOOGLE_CLIENT_ID": "${user_config.google_client_id}",
+        "GOOGLE_CLIENT_SECRET": "${user_config.google_client_secret}",
+        "GOOGLE_REFRESH_TOKEN": "${user_config.google_refresh_token}",
+        "GOOGLE_DRIVE_FOLDER_ID": "${user_config.google_drive_folder_id}",
+        "GITHUB_TOKEN": "${user_config.github_token}",
+        "PULSE_KIT_RECORDINGS_DIR": "${user_config.recordings_dir}",
+        "PULSE_KIT_TIME_ZONE": "${user_config.time_zone}"
+      }
+    }
+  },
+  "userConfig": {
+    "pulse_kit_dir": {
+      "type": "directory",
+      "title": "Pasta do pulse-kit",
+      "description": "Clone do pulse-kit já compilado (pnpm install && pnpm build).",
+      "required": true
+    },
+    "google_client_id": {
+      "type": "string",
+      "title": "Google OAuth client id",
+      "description": "O mesmo do polar-drive-sync. Vazio desliga as ferramentas que leem o Drive.",
+      "default": ""
+    },
+    "google_client_secret": {
+      "type": "string",
+      "title": "Google OAuth client secret",
+      "description": "O mesmo do polar-drive-sync.",
+      "sensitive": true,
+      "default": ""
+    },
+    "google_refresh_token": {
+      "type": "string",
+      "title": "Google refresh token",
+      "description": "O mesmo do polar-drive-sync.",
+      "sensitive": true,
+      "default": ""
+    },
+    "google_drive_folder_id": {
+      "type": "string",
+      "title": "Pasta Polar_Flow_Sync no Drive",
+      "description": "Id da pasta raiz que guarda as pastas de cada ano.",
+      "default": ""
+    },
+    "github_token": {
+      "type": "string",
+      "title": "Token do GitHub para disparar o sync",
+      "description": "Token fine-grained com Actions: read and write só no polar-drive-sync. Vazio desliga o trigger_polar_sync.",
+      "sensitive": true,
+      "default": ""
+    },
+    "recordings_dir": {
+      "type": "directory",
+      "title": "Pasta das gravações do openPulse",
+      "description": "O analyze_recording só lê arquivos .json e .fit dentro dela.",
+      "default": ""
+    },
+    "time_zone": {
+      "type": "string",
+      "title": "Fuso horário",
+      "description": "Define qual é o dia de hoje para a carga de treino.",
+      "default": "America/Sao_Paulo"
+    }
+  }
+}

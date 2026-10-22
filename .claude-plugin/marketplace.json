@@ -1,0 +1,14 @@
+{
+  "name": "treino-plugins",
+  "description": "Plugins pessoais de treino: Polar H10, openPulse, polar-drive-sync e pulse-kit.",
+  "owner": {
+    "name": "bielrodrigues2406"
+  },
+  "plugins": [
+    {
+      "name": "treino",
+      "source": "./plugins/treino",
+      "description": "Servidor MCP do pulse-kit, comandos de análise de treino e protocolos de teste com o H10."
+    }
+  ]
+}
